@@ -4,14 +4,20 @@ const app = express();
 const port = process.env.PORT || 3000;
 const path = require('path');
 const mongoose = require('mongoose');
+const auth = require('./routes/auth.js');
 
 //Mongoose Connection
-/*
-mongoose.connect('mongodb+srv://hjjinnie:Codesmith@cluster0-bdriw.mongodb.net/test?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://hjjinnie:Codesmith@cluster0-bdriw.mongodb.net/BusyBazaar?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
     console.log('Connected to Database');
 });
-*/
+
+//Use
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//route handlers
+app.use('/auth', auth);
 
 //Main get request
 app.get('/', (req, res) => {
@@ -28,5 +34,7 @@ app.use((err, req, res) => {
   console.log(err);
   return res.status(500).json({ message: err });
 });
+
+
 
 app.listen(port, () => console.log('Listening on port ' + port ));
