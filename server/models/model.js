@@ -48,6 +48,7 @@ userModel.pre('save', async function (next){
 // }
 
 const Users = mongoose.model('users', userModel);
-const Product = mongoose.model('products', productModel);
+const Products = mongoose.model('products', productModel);
 
-module.exports = Users;
+module.exports = { Users: Users, Products: Products };
+//module.exports = Products;

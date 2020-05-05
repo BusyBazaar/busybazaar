@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000;
 const path = require('path');
 const mongoose = require('mongoose');
 const auth = require('./routes/auth.js');
+const product = require('./routes/product.js');
 
 //Mongoose Connection
 mongoose.connect('mongodb+srv://hjjinnie:Codesmith@cluster0-bdriw.mongodb.net/BusyBazaar?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //route handlers
 app.use('/auth', auth);
+app.use('/product', product);
 
 //Main get request
 app.get('/', (req, res) => {
