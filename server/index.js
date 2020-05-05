@@ -25,6 +25,7 @@ app.all('*', (req, res) => {
 
 //Global Error Handler
 app.use((err, req, res) => {
+  console.log(err);
   return res.status(500).json({ message: err });
 });
 
