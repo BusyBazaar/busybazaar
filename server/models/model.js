@@ -3,30 +3,24 @@ const Schema = mongoose.Schema;
 
 const SALT_WORK_FACTOR = 10;
 const bcrypt = require('bcryptjs');
-const {JWT_KEY} = require('../misc/keys.js');
-const jwt = require('jsonwebtoken');
+// const {JWT_KEY} = require('../misc/keys.js');
+// const jwt = require('jsonwebtoken');
 
 const userModel = new Schema({
   username: {type: String, required: [true, 'username is required']},
   password: {type: String, required: [true, 'password is required']},
-  products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
-  tokens: [{
-    token:{
-      type:String,
-      required:true
-    }
-  }]
+  products: [{ type: Schema.Types.ObjectId, ref: 'products' }],
 });
 
 const productModel = new Schema({
-    name: {type: String, required: [true, 'username is required']},
-    description: {type: String, required: [true, 'password is required']},
-    country: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
-    category: {type: String, required: [true, 'password is required']},
-    price: {type: String, required: [true, 'password is required']},
-    quantity: {type: String, required: [true, 'password is required']},
-    postedBy: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  });
+    name: {type: String, required: [true, 'name is required']},
+    description: {type: String, required: [true, 'description is required']},
+    country: {type: String, required: [true, 'country is required']},
+    category: {type: String, required: [true, 'category is required']},
+    price: {type: Number, required: [true, 'price is required']},
+    quantity: {type: Number, required: [true, 'quantity is required']},
+    postedBy: [{ type: Schema.Types.ObjectId, ref: 'users' }],
+});
 
 userModel.pre('save', async function (next){
   //within this context, 'this' refers to the document about to be saved
@@ -45,16 +39,15 @@ userModel.pre('save', async function (next){
   // })
 });
 
-userModel.methods.generateAuthToken = async function(){
-  const user = this
-  const token = jwt.sign({_id: user._id}, JWT_KEY)
-  user.tokens = user.tokens.concat({token})
-  await user.save()
-  return token
-}
+// userModel.methods.generateAuthToken = async function(){
+//   const user = this
+//   const token = jwt.sign({_id: user._id}, JWT_KEY)
+//   user.tokens = user.tokens.concat({token})
+//   await user.save()
+//   return token
+// }
 
 const Users = mongoose.model('users', userModel);
 const Product = mongoose.model('products', productModel);
 
 module.exports = Users;
-module.exports = Product;
