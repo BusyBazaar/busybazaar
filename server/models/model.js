@@ -6,10 +6,9 @@ const bcrypt = require('bcryptjs');
 const {JWT_KEY} = require('../misc/keys.js');
 const jwt = require('jsonwebtoken');
 
-const schemaModel = new Schema({
+const userModel = new Schema({
   username: {type: String, required: [true, 'username is required']},
   password: {type: String, required: [true, 'password is required']},
-  products: [{ Schema.Types.Ob }]
   tokens: [{
     token:{
       type:String,
@@ -18,7 +17,17 @@ const schemaModel = new Schema({
   }]
 });
 
-schemaModel.pre('save', async function (next){
+const productModel = new Schema({
+    name: {type: String, required: [true, 'username is required']},
+    description: {type: String, required: [true, 'password is required']},
+    country: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
+    category: {type: String, required: [true, 'password is required']},
+    price: {type: String, required: [true, 'password is required']},
+    quantity: {type: String, required: [true, 'password is required']},
+    postedBy: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  });
+
+userModel.pre('save', async function (next){
   //within this context, 'this' refers to the document about to be saved
   //in our case, it should have properties username and password
   const user = this;
@@ -35,7 +44,7 @@ schemaModel.pre('save', async function (next){
   // })
 });
 
-schemaModel.methods.generateAuthToken = async function(){
+userModel.methods.generateAuthToken = async function(){
   const user = this
   const token = jwt.sign({_id: user._id}, JWT_KEY)
   user.tokens = user.tokens.concat({token})
@@ -43,6 +52,8 @@ schemaModel.methods.generateAuthToken = async function(){
   return token
 }
 
-const Users = mongoose.model('users', schemaModel);
+const Users = mongoose.model('users', userModel);
+const Product = mongoose.model('products', productModel);
 
 module.exports = Users;
+module.exports = Product;

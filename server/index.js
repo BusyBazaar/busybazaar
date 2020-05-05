@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://hjjinnie:Codesmith@cluster0-bdriw.mongodb.net/test?retryWrites=true&w=majority');
 mongoose.connection.once('open', () => {
     console.log('Connected to Database');
-  });
+});
 
 //Main get request
 app.get('/', (req, res) => {
