@@ -1,40 +1,44 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   mode: process.env.NODE_ENV,
-
-  entry: './client/index.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-  },
+  entry: "./client/index.js",
   devServer: {
     proxy: {
-      '/': 'http://localhost:3000/',
+      "/": "http://localhost:3000/",
     },
-    contentBase: './client',
-    publicPath: '/dist',
-    historyApiFallback: true
+    contentBase: "./client",
+    publicPath: "/dist",
+    historyApiFallback: true,
+  },
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
+    filename: "bundle.js",
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.jsx?/,
         exclude: /node_modules/,
         loader: "babel-loader",
         query: {
           presets: ["@babel/env", "@babel/react"],
-          plugins: ["@babel/plugin-proposal-class-properties", '@babel/plugin-transform-runtime', '@babel/transform-async-to-generator']
-        }
+          plugins: [
+            "@babel/plugin-proposal-class-properties",
+            "@babel/plugin-transform-runtime",
+            "@babel/transform-async-to-generator",
+          ],
+        },
       },
       {
-        test: /\.(css|scss)$/,
+        test: /.(css|scss)$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
     ],
-    resolve: {
-      extensions: [".js", ".jsx", ".css", ".scss"]
-    }
+  },
+  resolve: {
+    extensions: [".js", ".jsx", ".css", ".scss"],
   },
 };

@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const schemaModel = new Schema({
   username: {type: String, required: [true, 'username is required']},
   password: {type: String, required: [true, 'password is required']},
-  products: [{ Schema.Types.Ob }]
+  products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
   tokens: [{
     token:{
       type:String,
