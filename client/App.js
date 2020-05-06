@@ -11,6 +11,7 @@ class App extends Component {
       <div className="app-layout">
         <Switch>
           <Route exact path="/login" component={ LoginContainer } />
+          
           <Route exact path="/register" component={ RegisterContainer } />
           <ProtectedRoute exact path="/" component={ MainContainer } />
         </Switch>
