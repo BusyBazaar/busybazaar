@@ -22,8 +22,19 @@ const initialState = {
 export const UserContextProvider = props => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
+  // Actions
+  function addProduct(id) {
+    dispatch({
+      type: 'ADD_PRODUCT',
+      payload: id
+    });
+  }
+
   return (
-    <UserContext.Provider value={state}>
+    <UserContext.Provider value={{
+      products: state.products,
+      addProduct
+    }}>
       {props.children}
     </UserContext.Provider>
   );
