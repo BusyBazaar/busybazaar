@@ -8,6 +8,7 @@ const LoginContainer = (props) => {
       props.history.push("/");
     });
   };
+  
   return (
     <div>
       <button onClick={handleLogin}>Log in</button>
