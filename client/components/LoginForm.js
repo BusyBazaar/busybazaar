@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Auth from './Auth'
 
 
-class SignIn extends Component {
+class LoginForm extends Component {
     constructor() {
         super();
         this.state = {
@@ -79,4 +79,4 @@ class SignIn extends Component {
     }
 };
 
-export default SignIn
+export default LoginForm
