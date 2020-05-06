@@ -6,7 +6,7 @@ const ProductList = () => {
   const { products } = useContext(UserContext);
   return (
     <div>
-    <h2> Product List </h2>
+    <h3> Product List </h3>
     <ul className="product-list">
       { products.map(product => (<Product key={product.id} product={product}/>))}
     </ul>
