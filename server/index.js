@@ -25,6 +25,7 @@ mongoose.connection.once('open', () => {
 app.use('/auth', auth);
 app.use('/product', product);
 
+app.use(express.static(path.resolve(__dirname, '../dist')));
 //Main get request
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'));
