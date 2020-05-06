@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
-const Header = () => {
+const ProductList = () => {
+  const { products } = useContext(UserContext);
   return (
-    <h2>
-      Product List
-    </h2>
+    <div>
+    <h2> Product List </h2>
+    <ul className="product-list">
+      { products.map(product => (<li className="prod">
+        {product.name} {product.country}
+        </li>)) }
+    </ul>
+    </div>
   );
 }
  
-export default Header;
+export default ProductList;

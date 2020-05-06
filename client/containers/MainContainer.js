@@ -9,7 +9,6 @@ const MainContainer = () => {
       <Header />
       <ProductList />
       <ProductDisplay />
-      MainContainer
     </div>
   );
 }
