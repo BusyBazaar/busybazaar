@@ -12,6 +12,7 @@ class App extends Component {
       <UserContextProvider>
         <Switch>
           <Route exact path="/login" component={ LoginContainer } />
+          
           <Route exact path="/register" component={ RegisterContainer } />
           <ProtectedRoute exact path="/" component={ MainContainer } />
         </Switch>
