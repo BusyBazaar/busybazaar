@@ -36,11 +36,3 @@ const userController = {
           console.log('user was found')
         //   const token = await user.generateAuthToken() 
           res.locals.user = user;
-          return next();
-          }  
-        })
-      }     
-  },
-}
-
-module.exports = userController;
