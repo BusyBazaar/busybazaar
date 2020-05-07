@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Auth from '../components/Auth';
-import LoginForm from '../components/LoginForm';
+import { Link } from "react-router-dom";
 
 const LoginContainer = (props) => {
   const [username, setUsername] = useState("");
@@ -37,7 +37,31 @@ const LoginContainer = (props) => {
   return (
     <div>
       <h2>BusyBazaar</h2>
-      <LoginForm handleSubmit={handleSubmit} handleChangeUsername={handleChangeUsername} handleChangePassword={handleChangePassword} error={error} />
+      <form onSubmit={handleSubmit}>
+							<h5>Sign In</h5>
+							<div className="input-field">
+									<label htmlFor="username">username</label>
+									<input
+											type="text"
+											value={username}
+											id="username"
+											onChange={handleChangeUsername}
+									/>
+							</div>
+							<div className="input-field">
+									<label htmlFor="password">password</label>
+									<input
+											type="password"
+											value={password}
+											id="password"
+											onChange={handleChangePassword}
+									/>
+							</div>
+              <Link to="/register">Register</Link>
+							<div className="input-field">
+									<button>Login</button>
+							</div>
+					</form>
     </div>
   );
 }
