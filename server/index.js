@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 
 //Error Handling
 app.all('*', (req, res) => {
-  return res.status(404).send('Page not found')
+  return res.status(404).send('Oops! Something went wrong')
 })
 
 //Global Error Handler
