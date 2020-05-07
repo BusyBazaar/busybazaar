@@ -6,8 +6,8 @@ const ProductCart = () => {
   const { cart } = useContext(UserContext);
   return (
     <div className="productcart-container">
-      CART
-      { cart.length > 0 ? <ul className="cart-list"> { cart.map(product => (<Product key={product.id} product={product} />))}
+      <h1>CART</h1>
+      { cart.length > 0 ? <ul className="cart-list"> { cart.map(product => (<Product key={product._id} product={product} />))}
       </ul> : <ul>Your Cart is Empty</ul> }
     </div>
   );

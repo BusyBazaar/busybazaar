@@ -41,7 +41,7 @@ const LoginContainer = (props) => {
 
   return (
     <div>
-      <Header as='h2' color='black' textAlign='center'>
+      <Header className="header-main" as='h2' color='black' textAlign='center'>
         BusyBazaar
       </Header>
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>

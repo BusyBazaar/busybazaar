@@ -8,13 +8,13 @@ const ProductList = () => {
 
   const list = products.map(product => (
     <Product
-      key={product.id} 
+      key={product._id} 
       product={product}
     />
   ));
   return (
     <div className="productlist-container">
-      <h3> Product List </h3>
+      <h1> Product List </h1>
       <ul className="product-list">
         {list}
       </ul>

@@ -4,7 +4,6 @@ import { UserContext } from "../context/UserContext";
 
 const ProductContainer = (props) => {
   const [inputs, setInputs] = useState({
-    id: '',
     name: '',
     description: '',
     country: '',
@@ -12,7 +11,7 @@ const ProductContainer = (props) => {
     price: '',
     url: ''
   });
-  const { id, name, description, country, category, price, url } = inputs;
+  const { name, description, country, category, price, url } = inputs;
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -29,10 +28,10 @@ const ProductContainer = (props) => {
     setSubmitted(true);
     console.log('inputs ', inputs)
     if (name && description && country && category && price && url) {
-        addProduct({...inputs, id: Date.now()});
+        addProduct({...inputs });
         fetch('/product/add', {
           method: 'POST',
-          body: JSON.stringify({...inputs, id: Date.now()}),
+          body: JSON.stringify({...inputs}),
           headers: { 'Content-Type': 'application/json' },
         }) 
         .then(res => {
@@ -111,12 +110,12 @@ const ProductContainer = (props) => {
           </div>        
           <div className="input-field">
               <input
-                  type="text"
+                  type="number"
                   name="price"
                   value={price}
                   id="price"
                   onChange={handleChange}
-                  placeholder="price"
+                  placeholder="enter price in dollars"
               />
           </div>          
           <div className="input-field">
