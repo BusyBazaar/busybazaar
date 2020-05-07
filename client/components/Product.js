@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
-const Product = ({ product }) => {
+const Product = ({ product, key }) => {
+  const { cart, addCart } = useContext(UserContext);
+  // const [selectedId, setSelectedId] = useState();
+  const addToCart = (id) => {
+    addCart(id);
+    console.log('id:', id);
+    console.log('cart :', cart);
+  };
   return (
-    <li className="prod">
+    <li className="prod" onClick={() => addToCart(product.id)} >
       name: {product.name} 
       <div></div>
       country: {product.country}
