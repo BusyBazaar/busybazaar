@@ -1,0 +1,128 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white: rgb(247, 247, 247);
+  --dark: rgb(20, 20, 20);
+}
+
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 16px;
+}
+
+body {
+  background-color: #DFDBE5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='Artboard-5' fill='%239C92AC' fill-opacity='0.4' fill-rule='nonzero'%3E%3Cpath d='M6 18h12V6H6v12zM4 4h16v16H4V4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* General button styling */
+button {
+  background-color: rgb(88, 10, 88);
+  color: var(--white);
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  border: none;
+}
+
+.AppLayout {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+li {
+  list-style: none;
+}
+
+.Modal {
+  padding: 1rem;
+  color: var(--white);
+  border-radius: 5px;
+  height: 70vh;
+  min-width: 40vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: radial-gradient(
+      circle at 70% 18%,
+      hsla(126, 0%, 77%, 0.05) 0%,
+      hsla(126, 0%, 77%, 0.05) 41%,
+      transparent 41%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 6% 94%,
+      hsla(126, 0%, 77%, 0.05) 0%,
+      hsla(126, 0%, 77%, 0.05) 52%,
+      transparent 52%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 93% 63%,
+      hsla(126, 0%, 77%, 0.05) 0%,
+      hsla(126, 0%, 77%, 0.05) 85%,
+      transparent 85%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 5% 85%,
+      hsla(126, 0%, 77%, 0.05) 0%,
+      hsla(126, 0%, 77%, 0.05) 8%,
+      transparent 8%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 49% 93%,
+      hsla(126, 0%, 77%, 0.05) 0%,
+      hsla(126, 0%, 77%, 0.05) 37%,
+      transparent 37%,
+      transparent 100%
+    ),
+    linear-gradient(45deg, rgba(15, 5, 113, 0.8), rgba(191, 90, 222, 0.8));
+}
+
+.Modal input {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.Modal button {
+  background-color: rgb(248, 248, 248);
+  color: var(--dark);
+  margin: 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 0.75rem;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.Modal a {
+  color: white;
+  cursor: pointer;
+}
+
+.main-container {
+  display: flex;
+  
+}
+
+.prod-list {
+  background-color: white;
+}
