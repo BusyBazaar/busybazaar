@@ -1,19 +1,27 @@
-const Users = require('../models/model.js');
+const { Users } = require('../models/model.js');
 const bcrypt = require('bcryptjs');
 
 const userController = {
-  createUser: (req, res, next) => {
+  createUser: async (req, res, next) => {
     console.log('we are creating user')
     const {username, password} = req.body;
     console.log(req.body);
+
+    const userExist = await Users.findOne({ username: username });
+    if(userExist) return res.status(406).send('User already exists!');
 
     Users.create({
       username: username,
       password: password,
     }, async (err, user) => {
-      if(err) next(err);
+      if(err) 
+      next(err);
+      const token = await user.generateAuthToken() 
       res.locals.user = user;
-      next();
+
+      res.header('Authorization', token)
+
+      return next();
     })
   },
   login: async (req, res, next) =>{
@@ -22,17 +30,27 @@ const userController = {
     console.log(password)
     const user = await Users.findOne({username})
     console.log("this is user:", user)
-    if (!user){
-      console.log('No user')
-      return res.status(401).send({error: 'Login failed! Check authentication credentials'})
+    if(!user){
+      return res.status(406).send({error: 'Login failed! Check login credentials'});
     } else {
       bcrypt.compare(password, user.password)
       .then(async result => {
         if (!result) {
-          console.log('password does not match');
-          return next()
-        }else{
+          return res.status(401).send({error: 'Login failed! Check login credentials'});
+        } else {
           //user was found, compare the password to the hased one
           console.log('user was found')
-        //   const token = await user.generateAuthToken() 
+          const token = await user.generateAuthToken()
           res.locals.user = user;
+
+          res.header('Authorization', token);
+          console.log(token);
+
+          return next();
+          }  
+        })
+      }     
+  },
+}
+
+module.exports = userController;

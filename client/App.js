@@ -4,17 +4,19 @@ import LoginContainer from './containers/LoginContainer';
 import RegisterContainer from './containers/RegisterContainer';
 import MainContainer from './containers/MainContainer';
 import ProtectedRoute from './components/ProtectedRoute';
+import { UserContextProvider } from './context/UserContext';
 
 class App extends Component {
   render() {
     return (
-      <div className="app-layout">
+      <UserContextProvider>
         <Switch>
           <Route exact path="/login" component={ LoginContainer } />
+          
           <Route exact path="/register" component={ RegisterContainer } />
           <ProtectedRoute exact path="/" component={ MainContainer } />
         </Switch>
-      </div>
+      </UserContextProvider>
     );
   }
 }

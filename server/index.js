@@ -5,20 +5,27 @@ const port = process.env.PORT || 3000;
 const path = require('path');
 const mongoose = require('mongoose');
 const auth = require('./routes/auth.js');
-
-//Mongoose Connection
-mongoose.connect('mongodb+srv://hjjinnie:Codesmith@cluster0-bdriw.mongodb.net/BusyBazaar?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connection.once('open', () => {
-    console.log('Connected to Database');
-});
+const product = require('./routes/product.js');
+const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv');
 
 //Use
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser())
+dotenv.config();
+
+//Mongoose Connection
+mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connection.once('open', () => {
+    console.log('Connected to Database');
+});
 
 //route handlers
 app.use('/auth', auth);
+app.use('/product', product);
 
+app.use(express.static(path.resolve(__dirname, '../dist')));
 //Main get request
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'));
