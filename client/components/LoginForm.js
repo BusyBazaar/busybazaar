@@ -26,7 +26,9 @@ const LoginForm = (props) => {
 							<div className="input-field">
 									<button>Login</button>
 							</div>
+							
 					</form>
+					<a href="/auth/google">Sign In with Google</a>
 			</div>
 			)
 
