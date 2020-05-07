@@ -10,18 +10,15 @@ const Product = ({ product, key }) => {
     console.log('cart :', cart);
   };
   return (
-    <li className="prod" onDoubleClick={() => addToCart(product.id)} >
-      name: {product.name} 
-      <div></div>
-      country: {product.country}
-      <div></div>
-      description: {product.description}
-      <div></div>
-      category: {product.category}
-      <div></div>
-      price: {product.price}
-      <div></div>
+    <li className="prod" onDoubleClick={() => addToCart(product._id)} >
+      <ul className="prod-list">
+      <li>name: {product.name} </li>
+      <li>country: {product.country} </li>
+      <li>description: {product.description}</li>
+      <li>category: {product.category}</li>
+      <li>price: ${product.price}</li>
       <img src={product.url} />
+      </ul>
     </li>
   );
 }

@@ -6,9 +6,9 @@ const Header = () => {
   return (
     <div>
       <h1>Hello {username} !</h1>
-    <h2>
-      BusyBazaar 
-    </h2>
+    <h1>
+      Welcome to BusyBazaar!
+    </h1>
     </div>
   );
 }

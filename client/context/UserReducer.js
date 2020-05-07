@@ -11,7 +11,7 @@ export default function reducer (state, action) {
     case "ADD_CART":
       return {
         ...state, cart: [...state.cart, 
-          state.products.find(product => product.id === action.payload)
+          state.products.find(product => product._id === action.payload)
         ]
       };
     case "ADD_PRODUCT":
