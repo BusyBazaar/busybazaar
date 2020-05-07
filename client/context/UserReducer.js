@@ -18,7 +18,11 @@ export default function reducer (state, action) {
       return {
         ...state, products: [...state.products, action.payload]
       };
-    default:
+    case "UPDATE_PRODUCTS":
+      return {
+        ...state, products: [...state.products, ...action.payload]
+      };
+  default:
       return state;
   }
 }
