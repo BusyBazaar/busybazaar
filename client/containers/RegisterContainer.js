@@ -21,13 +21,14 @@ const RegisterContainer = (props) => {
     .then(res => {
       if (res.status === 406) {
         setError("username already in use try again");
+        console.log('hey')
         props.history.push("/register");
-      }
+      } else {
+          props.history.push("/login");
+        }
     })
-    .then(() => {
-        props.history.push("/login");
-      })
-    };
+ 
+ };
 
   return (
     <div>
