@@ -1,14 +1,14 @@
 import React from 'react';
 import Header from '../components/Header';
 import ProductList from '../components/ProductList';
-import ProductDisplay from '../components/ProductDisplay';
+import ProductCart from '../components/ProductCart';
 
 const MainContainer = () => {
   return (
     <div>
       <Header />
       <ProductList />
-      <ProductDisplay />
+      <ProductCart />
     </div>
   );
 }

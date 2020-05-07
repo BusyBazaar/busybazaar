@@ -10,12 +10,12 @@ const ProductContainer = (props) => {
   const [url, setUrl] = useState("");
   const { addProduct } = useContext(UserContext);
 
-  const handleChangeUsername = e => {
-    setUsername(e.target.value.trim());
-  };
-  const handleChangePassword = e => {
-    setPassword(e.target.value.trim());
-  };
+  // const handleChangeUsername = e => {
+  //   setUsername(e.target.value.trim());
+  // };
+  // const handleChangePassword = e => {
+  //   setPassword(e.target.value.trim());
+  // };
   // const handleSubmit = e => {
   //   e.preventDefault();
   //   console.log('username:' + username)
@@ -45,26 +45,49 @@ const ProductContainer = (props) => {
       <form onSubmit={handleSubmit}>
           <h3>ADD A PRODUCT</h3>
           <div className="input-field">
-              <label htmlFor="username">username</label>
               <input
                   type="text"
                   value={username}
-                  id="username"
-                  onChange={handleChangeUsername}
+                  id="name"
+                  onChange={handleChange}
+                  placeholder="name"
               />
           </div>
           <div className="input-field">
-              <label htmlFor="password">password</label>
               <input
-                  type="password"
+                  type="text"
                   value={password}
-                  id="password"
-                  onChange={handleChangePassword}
+                  id="description"
+                  onChange={handleChange}
+                  placeholder="description"
               />
           </div>
-          <Link to="/register">Register</Link>
           <div className="input-field">
-              <button>Login</button>
+              <input
+                  type="text"
+                  value={username}
+                  id="country"
+                  onChange={handleChange}
+                  placeholder="country"
+              />
+          </div>
+          <div className="input-field">
+              <input
+                  type="text"
+                  value={password}
+                  id="category"
+                  onChange={handleChange}
+                  placeholder="category"
+              />
+          </div>
+          <div className="input-field">
+              <input
+                  type="text"
+                  value={username}
+                  id="url"
+                  onChange={handleChange}
+                  placeholder="url"
+              />
           </div>
       </form>
     </div>

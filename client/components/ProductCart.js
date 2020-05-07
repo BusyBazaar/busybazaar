@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { UserContext } from '../context/UserContext';
 import Product from './Product';
 
-const ProductDisplay = () => {
+const ProductCart = () => {
   const { cart } = useContext(UserContext);
   return (
     <div>
@@ -13,4 +13,4 @@ const ProductDisplay = () => {
   );
 }
  
-export default ProductDisplay;
+export default ProductCart;
