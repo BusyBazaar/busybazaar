@@ -28,24 +28,34 @@ mongoose.connection.once('open', () => {
 passport.use(new GoogleStrategy({
   clientID: '847716762760-r2u4k2nd66tk4tbebg6kpeftlvvbv2p8.apps.googleusercontent.com',
   clientSecret: 'GG5qhPwtgrvbrw8olumz9J_E',
-  callbackURL: "http://localhost:8080"
+  callbackURL: "http://localhost:8080/"
   // callbackURL: `${process.env.SERVER_API_URL}/auth/google/callback`
 },
 function(accessToken, refreshToken, profile, done) {
-     Users.findOne({ username: profile.id }, function (err, user) {
+     Users.findOne({ username: profile.id }, async function (err, user) {
       if (err){
         return done(err);
       } 
       if (!user){
         user = new Users({
           username: profile.username,
-          password: accessToken,
+          password: null,
         });
+        const token = await user.generateAuthToken()
+        console.log(res.locals.user); 
+        res.locals.user = user;
+        console.log('RESLOCALSUSER',res.locals.user); 
+        console.log('TOKENN',token);
+        res.header('Authorization', token)
         user.save(function(err){
           if (err) console.log(err);
+
+          console.log('REACHED');
+
           return done(err, user);
         })
       } else{
+        console.log(user);
         return done(err, user);
       }
      });

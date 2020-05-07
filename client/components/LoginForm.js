@@ -28,7 +28,6 @@ const LoginForm = (props) => {
 							</div>
 							
 					</form>
-					<a href="/auth/google">Sign In with Google</a>
 			</div>
 			)
 

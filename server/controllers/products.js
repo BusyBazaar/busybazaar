@@ -2,7 +2,7 @@ const { Products, Users } = require('../models/model.js');
 
 const productController = {
     createProduct: (req, res, next) => {
-        const {name, description, country, category, price, url, quantity} = req.body;
+        const { name, description, country, category, price, url } = req.body;
         const user = res.locals.user;
 
           Products.create({
@@ -12,7 +12,6 @@ const productController = {
             category: category,
             price: price,
             url: url,
-            quantity: quantity,
             postedBy: user._id,
         }, async (err, product) => {
             if(err) next(err);

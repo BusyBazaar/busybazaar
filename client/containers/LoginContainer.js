@@ -65,7 +65,9 @@ const LoginContainer = (props) => {
 							<div className="input-field">
 									<button>Login</button>
 							</div>
-					</form>
+          </form>
+          <a href="/auth/google">Sign In with Google</a>
+
     </div>
   );
 }
