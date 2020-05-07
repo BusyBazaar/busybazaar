@@ -9,7 +9,8 @@ router.post('/register', createUser, (req, res) => {
 });
 
 router.post('/login', login, (req, res) => {
-  return res.status(200).send('Login successfully');
+  console.log('TOKEN', res.locals.token)
+  return res.status(200).json(res.locals.token);
 });
 
 router.get('/google', passport.authenticate('google', {session:false, scope: ['https://www.googleapis.com/auth/userinfo.profile'] }));

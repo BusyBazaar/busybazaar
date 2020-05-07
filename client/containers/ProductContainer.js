@@ -15,7 +15,7 @@ const ProductContainer = (props) => {
 
   const [submitted, setSubmitted] = useState(false);
 
-  const { addProduct } = useContext(UserContext);
+  const { addProduct, token } = useContext(UserContext);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -27,12 +27,13 @@ const ProductContainer = (props) => {
 
     setSubmitted(true);
     console.log('inputs ', inputs)
+    console.log(token);
     if (name && description && country && category && price && url) {
         addProduct({...inputs });
         fetch('/product/add', {
           method: 'POST',
           body: JSON.stringify({...inputs}),
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'Authorization': token },
         }) 
         .then(res => {
           props.history.push('/')

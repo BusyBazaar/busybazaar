@@ -29,7 +29,6 @@ const userController = {
     console.log('req.body', req.body)
     console.log(password)
     const user = await Users.findOne({username})
-    console.log("this is user:", user)
     if(!user){
       return res.status(406).send({error: 'Login failed! Check login credentials'});
     } else {
@@ -39,13 +38,14 @@ const userController = {
           return res.status(401).send({error: 'Login failed! Check login credentials'});
         } else {
           //user was found, compare the password to the hased one
-          console.log('user was found')
           const token = await user.generateAuthToken()
           res.locals.user = user;
 
-          res.header('Authorization', token);
-          console.log(token);
+          console.log(user);
 
+          res.header('Authorization', token);
+          res.locals.token = token;
+          
           return next();
           }  
         })
