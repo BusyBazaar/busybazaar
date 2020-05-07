@@ -117,3 +117,8 @@ li {
   color: white;
   cursor: pointer;
 }
+
+.main-container {
+  display: flex;
+  
+}

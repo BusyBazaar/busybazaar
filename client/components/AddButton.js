@@ -6,7 +6,7 @@ const AddButton = () => {
   const handleGetProducts = e => {
     console.log('hey')
     e.preventDefault();
-    fetch('/getproducts', {
+    fetch('/product/products', {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'

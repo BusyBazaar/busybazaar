@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const MainContainer = (props) => {
   return (
-    <div>
+    <div class="main-container">
       <Header />
       <AddButton />
       <ProductList />
