@@ -4,9 +4,10 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: "./client/index.js",
   devServer: {
-    proxy: {
-      "/": "http://localhost:3000/",
-    },
+    historyApiFallback: true,
+    // proxy: {
+    //   "/": "http://localhost:3000/",
+    // },
     contentBase: "./client",
     publicPath: "/dist",
     historyApiFallback: true,

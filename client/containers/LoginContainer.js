@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
-import Auth from "../components/Auth";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import Auth from '../components/Auth';
+import { Link, useLocation } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import {
   Button,
@@ -13,6 +13,12 @@ import {
 } from "semantic-ui-react";
 
 const LoginContainer = (props) => {
+  const token = (new URLSearchParams(useLocation().search).get("token"));
+
+  if (token) {
+    Auth.login(() => props.history.push('/'));
+  }
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -96,7 +102,7 @@ const LoginContainer = (props) => {
           </Message>
         </Grid.Column>
       </Grid>
-      <a href="/auth/google">Sign In with Google</a>
+      <a href="http://localhost:3000/auth/google">Sign In with Google</a>
     </div>
   );
 };
