@@ -30,7 +30,7 @@ mongoose.connection.once('open', () => {
 passport.use(new GoogleStrategy({
   clientID: '847716762760-r2u4k2nd66tk4tbebg6kpeftlvvbv2p8.apps.googleusercontent.com',
   clientSecret: 'GG5qhPwtgrvbrw8olumz9J_E',
-  callbackURL: "http://localhost:8080/auth/google/callback"
+  callbackURL: "http://localhost:3000/auth/google/callback"
 },
 function(accessToken, refreshToken, profile, done) {
   console.log(profile);
