@@ -19,6 +19,8 @@ const Product = ({ product, key }) => {
       <div></div>
       category: {product.category}
       <div></div>
+      price: {product.price}
+      <div></div>
       <img src={product.url} />
     </li>
   );

@@ -9,9 +9,10 @@ const ProductContainer = (props) => {
     description: '',
     country: '',
     category: '',
+    price: '',
     url: ''
   });
-  const { id, name, description, country, category, url } = inputs;
+  const { id, name, description, country, category, price, url } = inputs;
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -27,9 +28,16 @@ const ProductContainer = (props) => {
 
     setSubmitted(true);
     console.log('inputs ', inputs)
-    if (name && description && country && category && url) {
+    if (name && description && country && category && price && url) {
         addProduct({...inputs, id: Date.now()});
-        props.history.push('/')
+        fetch('/product/add', {
+          method: 'POST',
+          body: JSON.stringify({...inputs, id: Date.now()}),
+          headers: { 'Content-Type': 'application/json' },
+        }) 
+        .then(res => {
+          props.history.push('/')
+        })
     }
 }
 
@@ -99,6 +107,16 @@ const ProductContainer = (props) => {
                   id="category"
                   onChange={handleChange}
                   placeholder="category"
+              />
+          </div>        
+          <div className="input-field">
+              <input
+                  type="text"
+                  name="price"
+                  value={price}
+                  id="price"
+                  onChange={handleChange}
+                  placeholder="price"
               />
           </div>          
           <div className="input-field">

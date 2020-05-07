@@ -13,7 +13,7 @@ const ProductList = () => {
     />
   ));
   return (
-    <div>
+    <div className="productlist-container">
       <h3> Product List </h3>
       <ul className="product-list">
         {list}
