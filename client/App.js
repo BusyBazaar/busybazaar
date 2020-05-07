@@ -7,7 +7,6 @@ import MainContainer from './containers/MainContainer';
 import ProtectedRoute from './components/ProtectedRoute';
 import { UserContextProvider } from './context/UserContext';
 import './styles.css';
-
 class App extends Component {
   render() {
     return (

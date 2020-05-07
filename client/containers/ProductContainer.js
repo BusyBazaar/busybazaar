@@ -15,11 +15,6 @@ const ProductContainer = (props) => {
 
   const [submitted, setSubmitted] = useState(false);
 
-  // const [name, setName] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [country, setCountry] = useState("");
-  // const [category, setCategory] = useState("");
-  // const [url, setUrl] = useState("");
   const { addProduct } = useContext(UserContext);
 
   function handleChange(e) {

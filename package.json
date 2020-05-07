@@ -34,7 +34,8 @@
     "path": "^0.12.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "semantic-ui-react": "^0.88.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

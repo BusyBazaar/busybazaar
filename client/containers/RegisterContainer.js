@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import Auth from '../components/Auth';
+import { Link } from "react-router-dom";
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
-const RegisterContainer = (props) => {
+const Register = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -27,38 +30,46 @@ const RegisterContainer = (props) => {
           props.history.push("/login");
         }
     })
- 
- };
 
+  };
   return (
     <div>
-      <h2>BusyBazaar</h2>
-      <form onSubmit={handleSubmit}>
-							<h5>Register</h5>
-							<div className="input-field">
-									<input
-											type="text"
-											value={username}
-											id="username"
-                      onChange={handleChangeUsername}
-                      placeholder="username"
-									/>
-							</div>
-							<div className="input-field">
-									<input
-											type="password"
-											value={password}
-											id="password"
-                      onChange={handleChangePassword}
-                      placeholder="password"
-									/>
-							</div>
-							<div className="input-field">
-									<button>Submit</button>
-							</div>
-					</form>
+      <Header as='h2' color='black' textAlign='center'>
+        BusyBazaar
+      </Header>
+      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+        <Grid.Column style={{ maxWidth: 450, minWidth: 400 }}>
+          <Header as='h2' color='blue' textAlign='center'>
+            Register
+          </Header>
+          <Form onSubmit={handleSubmit} size='large'>
+            <Segment stacked>
+              <Form.Input 
+                fluid icon='user' 
+                iconPosition='left' 
+                value={username}
+                placeholder='username' 
+                type='text'
+                onChange={handleChangeUsername}
+              />
+              <Form.Input
+                fluid
+                icon='lock'
+                iconPosition='left'
+                value={password}
+                placeholder='password'
+                type='password'
+                onChange={handleChangePassword}
+              />
+              <Button color='blue' fluid size='large'>
+                Register
+              </Button>
+            </Segment>
+          </Form>
+        </Grid.Column>
+      </Grid>
     </div>
-  );
+  )
 }
- 
-export default RegisterContainer;
+
+export default Register;
