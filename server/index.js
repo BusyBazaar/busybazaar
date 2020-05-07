@@ -11,12 +11,14 @@ const dotenv = require('dotenv');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const { Users } = require('./models/model.js');
-
+const { uuid } = require('uuidv4');
 
 //Use
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
+app.use(passport.initialize());
+app.use(passport.session());
 dotenv.config();
 
 //Mongoose Connection
@@ -28,30 +30,23 @@ mongoose.connection.once('open', () => {
 passport.use(new GoogleStrategy({
   clientID: '847716762760-r2u4k2nd66tk4tbebg6kpeftlvvbv2p8.apps.googleusercontent.com',
   clientSecret: 'GG5qhPwtgrvbrw8olumz9J_E',
-  callbackURL: "http://localhost:8080/"
-  // callbackURL: `${process.env.SERVER_API_URL}/auth/google/callback`
+  callbackURL: "http://localhost:8080/auth/google/callback"
 },
 function(accessToken, refreshToken, profile, done) {
+  console.log(profile);
+  console.log('CB for google')
      Users.findOne({ username: profile.id }, async function (err, user) {
       if (err){
         return done(err);
       } 
       if (!user){
         user = new Users({
-          username: profile.username,
-          password: null,
+          username: profile.id,
+          password: uuid(),
         });
-        const token = await user.generateAuthToken()
-        console.log(res.locals.user); 
-        res.locals.user = user;
-        console.log('RESLOCALSUSER',res.locals.user); 
-        console.log('TOKENN',token);
-        res.header('Authorization', token)
         user.save(function(err){
           if (err) console.log(err);
-
           console.log('REACHED');
-
           return done(err, user);
         })
       } else{
@@ -63,15 +58,6 @@ function(accessToken, refreshToken, profile, done) {
 ));
 
 
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
-
-
-app.get('/auth/google/callback', 
-passport.authenticate('google', { failureRedirect: '/auth/login' }),
-function(req, res) {
-  res.redirect('/');
-});
 
 //route handlers
 app.use('/auth', auth);
