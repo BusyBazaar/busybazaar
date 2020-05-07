@@ -33,7 +33,8 @@ const ProductContainer = (props) => {
     setSubmitted(true);
     console.log('inputs ', inputs)
     if (name && description && country && category && url) {
-        addProduct({...inputs, id: Date.now()})
+        addProduct({...inputs, id: Date.now()});
+        props.history.push('/')
     }
 }
 
@@ -63,7 +64,7 @@ const ProductContainer = (props) => {
   return (
     <div>
       <h2>BusyBazaar</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
           <h3>ADD A PRODUCT</h3>
           <div className="input-field">
               <input
@@ -98,13 +99,13 @@ const ProductContainer = (props) => {
           <div className="input-field">
               <input
                   type="text"
-                  name={category}
+                  name="category"
                   value={category}
                   id="category"
                   onChange={handleChange}
                   placeholder="category"
               />
-          </div>
+          </div>          
           <div className="input-field">
               <input
                   type="text"
@@ -115,6 +116,9 @@ const ProductContainer = (props) => {
                   placeholder="url"
               />
           </div>
+          <div className="input-field">
+						<button>Submit</button>
+					</div>
       </form>
     </div>
   );
