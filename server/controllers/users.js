@@ -49,7 +49,7 @@ const userController = {
           return next();
           }  
         })
-      }     
+    }     
   },
 }
 

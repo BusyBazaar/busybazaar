@@ -22,7 +22,7 @@ const productModel = new Schema({
     country: {type: String, required: [true, 'country is required']},
     category: {type: String, required: [true, 'category is required']},
     price: {type: Number, required: [true, 'price is required']},
-    quantity: {type: Number, required: [true, 'quantity is required']},
+    url: {type: String, required: [true, 'url is required']},
     postedBy: [{ type: Schema.Types.ObjectId, ref: 'users' }],
 });
 

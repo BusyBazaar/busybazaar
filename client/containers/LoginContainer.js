@@ -79,6 +79,7 @@ const LoginContainer = (props) => {
           </Message>
         </Grid.Column>
       </Grid>
+      <a href="/auth/google">Sign In with Google</a>
     </div>
   )
 }

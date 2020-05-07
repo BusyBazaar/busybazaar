@@ -8,6 +8,10 @@ const auth = require('./routes/auth.js');
 const product = require('./routes/product.js');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const { Users } = require('./models/model.js');
+
 
 //Use
 app.use(express.json());
@@ -19,6 +23,54 @@ dotenv.config();
 mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
     console.log('Connected to Database');
+});
+
+passport.use(new GoogleStrategy({
+  clientID: '847716762760-r2u4k2nd66tk4tbebg6kpeftlvvbv2p8.apps.googleusercontent.com',
+  clientSecret: 'GG5qhPwtgrvbrw8olumz9J_E',
+  callbackURL: "http://localhost:8080/"
+  // callbackURL: `${process.env.SERVER_API_URL}/auth/google/callback`
+},
+function(accessToken, refreshToken, profile, done) {
+     Users.findOne({ username: profile.id }, async function (err, user) {
+      if (err){
+        return done(err);
+      } 
+      if (!user){
+        user = new Users({
+          username: profile.username,
+          password: null,
+        });
+        const token = await user.generateAuthToken()
+        console.log(res.locals.user); 
+        res.locals.user = user;
+        console.log('RESLOCALSUSER',res.locals.user); 
+        console.log('TOKENN',token);
+        res.header('Authorization', token)
+        user.save(function(err){
+          if (err) console.log(err);
+
+          console.log('REACHED');
+
+          return done(err, user);
+        })
+      } else{
+        console.log(user);
+        return done(err, user);
+      }
+     });
+  }
+));
+
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+
+
+app.get('/auth/google/callback', 
+passport.authenticate('google', { failureRedirect: '/auth/login' }),
+function(req, res) {
+  res.redirect('/');
 });
 
 //route handlers
@@ -33,7 +85,7 @@ app.get('/', (req, res) => {
 
 //Error Handling
 app.all('*', (req, res) => {
-  return res.status(404).send('Page not found')
+  return res.status(404).send('Oops! Something went wrong')
 })
 
 //Global Error Handler
