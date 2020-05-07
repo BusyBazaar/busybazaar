@@ -36,6 +36,7 @@ const LoginContainer = (props) => {
 
   return (
     <div>
+      <h2>BusyBazaar</h2>
       <LoginForm handleSubmit={handleSubmit} handleChangeUsername={handleChangeUsername} handleChangePassword={handleChangePassword} error={error} />
     </div>
   );
