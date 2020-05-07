@@ -29,11 +29,26 @@ export const UserContextProvider = props => {
       payload: id
     });
   }
+  function addUsername(id) {
+    dispatch({
+      type: 'ADD_USERNAME',
+      payload: id
+    });
+  }
+  function addPassword(id) {
+    dispatch({
+      type: 'ADD_PASSWORD',
+      payload: id
+    });
+  }
 
   return (
     <UserContext.Provider value={{
+      username: state.username,
       products: state.products,
-      addProduct
+      addProduct,
+      addUsername,
+      addPassword
     }}>
       {props.children}
     </UserContext.Provider>

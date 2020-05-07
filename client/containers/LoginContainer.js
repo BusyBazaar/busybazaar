@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Auth from '../components/Auth';
 import { Link } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
 const LoginContainer = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { addUsername, addPassword } = useContext(UserContext);
 
   const handleChangeUsername = e => {
     setUsername(e.target.value.trim());
@@ -29,6 +31,8 @@ const LoginContainer = (props) => {
                 setError('This username is not found')
                 props.history.push('/login')
             } else {
+              addUsername(username);
+              addPassword(password);
               Auth.login(() => props.history.push('/'));
             }
         })
