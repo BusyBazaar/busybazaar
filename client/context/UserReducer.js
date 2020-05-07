@@ -14,6 +14,10 @@ export default function reducer (state, action) {
           state.products.find(product => product.id === action.payload)
         ]
       };
+    case "ADD_PRODUCT":
+      return {
+        ...state, products: [...state.products, action.payload]
+      };
     default:
       return state;
   }

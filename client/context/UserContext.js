@@ -38,6 +38,12 @@ export const UserContextProvider = props => {
       payload: id
     });
   }
+  function addProduct(id) {
+    dispatch({
+      type: 'ADD_PRODUCT',
+      payload: id
+    });
+  }
   function addUsername(id) {
     dispatch({
       type: 'ADD_USERNAME',
@@ -56,6 +62,7 @@ export const UserContextProvider = props => {
       username: state.username,
       products: state.products,
       addCart,
+      addProduct,
       addUsername,
       addPassword,
       cart: state.cart

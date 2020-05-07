@@ -44,21 +44,21 @@ const LoginContainer = (props) => {
       <form onSubmit={handleSubmit}>
 							<h5>Sign In</h5>
 							<div className="input-field">
-									<label htmlFor="username">username</label>
 									<input
 											type="text"
 											value={username}
 											id="username"
-											onChange={handleChangeUsername}
+                      onChange={handleChangeUsername}
+                      placeholder="username"
 									/>
 							</div>
 							<div className="input-field">
-									<label htmlFor="password">password</label>
 									<input
 											type="password"
 											value={password}
 											id="password"
-											onChange={handleChangePassword}
+                      onChange={handleChangePassword}
+                      placeholder="password"
 									/>
 							</div>
               <Link to="/register">Register</Link>
