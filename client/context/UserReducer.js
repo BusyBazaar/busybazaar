@@ -8,11 +8,15 @@ export default function reducer (state, action) {
       return {
         ...state, password: action.payload
       };
-    case "ADD_PRODUCT":
+    case "ADD_CART":
       return {
         ...state, cart: [...state.cart, 
-          state.products.filter(product => product.id === action.payload)
+          state.products.find(product => product.id === action.payload)
         ]
+      };
+    case "ADD_PRODUCT":
+      return {
+        ...state, products: [...state.products, action.payload]
       };
     default:
       return state;
