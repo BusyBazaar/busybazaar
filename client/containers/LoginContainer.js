@@ -13,7 +13,7 @@ import {
 } from "semantic-ui-react";
 
 const LoginContainer = (props) => {
-  const token = (new URLSearchParams(useLocation().search).get("token"));
+  //const token = (new URLSearchParams(useLocation().search).get("token"));
 
   if (token) {
     Auth.login(() => props.history.push('/'));
