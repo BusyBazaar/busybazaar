@@ -10,7 +10,7 @@ const Product = ({ product, key }) => {
     console.log('cart :', cart);
   };
   return (
-    <li className="prod" onClick={() => addToCart(product.id)} >
+    <li className="prod" onDoubleClick={() => addToCart(product.id)} >
       name: {product.name} 
       <div></div>
       country: {product.country}
