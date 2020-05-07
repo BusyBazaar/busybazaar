@@ -27,7 +27,8 @@ const initialState = {
     }
   ],
   filteredProducts: [],
-  cart: []
+  cart: [],
+  token: ''
 }
 
 export const UserContextProvider = props => {
@@ -64,6 +65,12 @@ export const UserContextProvider = props => {
       payload: id
     });
   }
+  function getToken(token){
+    dispatch({
+      type: 'GET_TOKEN',
+      payload: token
+    });
+  }
 
   return (
     <UserContext.Provider value={{
@@ -74,7 +81,9 @@ export const UserContextProvider = props => {
       addUsername,
       addPassword,
       updateProducts,
-      cart: state.cart
+      getToken,
+      cart: state.cart,
+      token: state.token
     }}>
       {props.children}
     </UserContext.Provider>

@@ -23,8 +23,7 @@ try {
         }
         //next middleware will want access to user and token
         res.locals.user = user
-        res.locals.token = token
-
+    
         next()
     } catch (error) {
         console.log(error);

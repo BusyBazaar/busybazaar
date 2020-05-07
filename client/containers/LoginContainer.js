@@ -1,75 +1,92 @@
-import React, { useState, useContext } from 'react';
-import Auth from '../components/Auth';
+import React, { useState, useContext } from "react";
+import Auth from "../components/Auth";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment,
+} from "semantic-ui-react";
 
 const LoginContainer = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { addUsername, addPassword } = useContext(UserContext);
+  const { addUsername, addPassword, getToken, token } = useContext(UserContext);
 
-  const handleChangeUsername = e => {
+  const handleChangeUsername = (e) => {
     setUsername(e.target.value.trim());
   };
-  const handleChangePassword = e => {
+  const handleChangePassword = (e) => {
     setPassword(e.target.value.trim());
   };
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('username:' + username)
-    fetch('/auth/login', {
-        method: 'POST',
-        body: JSON.stringify({username, password}),
-        headers: { 'Content-Type': 'application/json' },
+    console.log("username:" + username);
+    fetch("/auth/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+      headers: { "Content-Type": "application/json" },
     })
-        // 401 and 406  
-        .then(res => {
-            if (res.status === 401) {
-                setError('This password does not match')
-            } else if (res.status === 406) {
-                setError('This username is not found')
-                props.history.push('/login')
-            } else {
-              addUsername(username);
-              addPassword(password);
-              Auth.login(() => props.history.push('/'));
-            }
-        })
-  }
+      .then((data) => {
+        if (data.status === 401) {
+          setError("This password does not match");
+        } else if (data.status === 406) {
+          setError("This username is not found");
+          props.history.push("/login");
+        } else {
+          return data.json();
+        }
+      })
+      .then((res) => {
+        getToken(res);
+        addUsername(username);
+        addPassword(password);
+        Auth.login(() => props.history.push("/"));
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
-      <Header className="header-main" as='h2' color='black' textAlign='center'>
+      <Header className="header-main" as="h2" color="black" textAlign="center">
         BusyBazaar
       </Header>
-      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+      <Grid
+        textAlign="center"
+        style={{ height: "100vh" }}
+        verticalAlign="middle"
+      >
         <Grid.Column style={{ maxWidth: 450, minWidth: 400 }}>
-          <Header as='h2' color='blue' textAlign='center'>
+          <Header as="h2" color="blue" textAlign="center">
             Log-in to your account
           </Header>
-          <Form onSubmit={handleSubmit} size='large'>
+          <Form onSubmit={handleSubmit} size="large">
             <Segment stacked>
-              <Form.Input 
-                fluid icon='user' 
-                iconPosition='left' 
+              <Form.Input
+                fluid
+                icon="user"
+                iconPosition="left"
                 value={username}
-                placeholder='username' 
-                type='text'
+                placeholder="username"
+                type="text"
                 onChange={handleChangeUsername}
               />
               <Form.Input
                 fluid
-                icon='lock'
-                iconPosition='left'
+                icon="lock"
+                iconPosition="left"
                 value={password}
-                placeholder='password'
-                type='password'
+                placeholder="password"
+                type="password"
                 onChange={handleChangePassword}
               />
 
-              <Button color='blue' fluid size='large'>
+              <Button color="blue" fluid size="large">
                 Login
               </Button>
             </Segment>
@@ -81,6 +98,6 @@ const LoginContainer = (props) => {
       </Grid>
       <a href="/auth/google">Sign In with Google</a>
     </div>
-  )
-}
+  );
+};
 export default LoginContainer;

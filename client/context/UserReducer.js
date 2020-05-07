@@ -22,6 +22,10 @@ export default function reducer (state, action) {
       return {
         ...state, products: [...state.products, ...action.payload]
       };
+    case "GET_TOKEN":
+      return {
+        ...state, token: action.payload
+      }
   default:
       return state;
   }
