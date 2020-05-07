@@ -3,19 +3,40 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
 const ProductContainer = (props) => {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [country, setCountry] = useState("");
-  const [category, setCategory] = useState("");
-  const [url, setUrl] = useState("");
+  const [inputs, setInputs] = useState({
+    id: '',
+    name: '',
+    description: '',
+    country: '',
+    category: '',
+    url: ''
+  });
+  const { id, name, description, country, category, url } = inputs;
+
+  const [submitted, setSubmitted] = useState(false);
+
+  // const [name, setName] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [country, setCountry] = useState("");
+  // const [category, setCategory] = useState("");
+  // const [url, setUrl] = useState("");
   const { addProduct } = useContext(UserContext);
 
-  // const handleChangeUsername = e => {
-  //   setUsername(e.target.value.trim());
-  // };
-  // const handleChangePassword = e => {
-  //   setPassword(e.target.value.trim());
-  // };
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setInputs(inputs => ({ ...inputs, [name]: value }));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    setSubmitted(true);
+    console.log('inputs ', inputs)
+    if (name && description && country && category && url) {
+        addProduct({...inputs, id: Date.now()})
+    }
+}
+
   // const handleSubmit = e => {
   //   e.preventDefault();
   //   console.log('username:' + username)
@@ -42,12 +63,13 @@ const ProductContainer = (props) => {
   return (
     <div>
       <h2>BusyBazaar</h2>
-      <form onSubmit={handleSubmit}>
+      <form>
           <h3>ADD A PRODUCT</h3>
           <div className="input-field">
               <input
                   type="text"
-                  value={username}
+                  name="name"
+                  value={name}
                   id="name"
                   onChange={handleChange}
                   placeholder="name"
@@ -56,7 +78,8 @@ const ProductContainer = (props) => {
           <div className="input-field">
               <input
                   type="text"
-                  value={password}
+                  name="description"
+                  value={description}
                   id="description"
                   onChange={handleChange}
                   placeholder="description"
@@ -65,7 +88,8 @@ const ProductContainer = (props) => {
           <div className="input-field">
               <input
                   type="text"
-                  value={username}
+                  name="country"
+                  value={country}
                   id="country"
                   onChange={handleChange}
                   placeholder="country"
@@ -74,7 +98,8 @@ const ProductContainer = (props) => {
           <div className="input-field">
               <input
                   type="text"
-                  value={password}
+                  name={category}
+                  value={category}
                   id="category"
                   onChange={handleChange}
                   placeholder="category"
@@ -83,7 +108,8 @@ const ProductContainer = (props) => {
           <div className="input-field">
               <input
                   type="text"
-                  value={username}
+                  name="url"
+                  value={url}
                   id="url"
                   onChange={handleChange}
                   placeholder="url"
