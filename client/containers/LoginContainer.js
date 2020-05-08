@@ -13,7 +13,7 @@ import {
 } from "semantic-ui-react";
 
 const LoginContainer = (props) => {
-  //const token = (new URLSearchParams(useLocation().search).get("token"));
+  const token = (new URLSearchParams(useLocation().search).get("token"));
 
   if (token) {
     Auth.login(() => props.history.push('/'));
@@ -22,7 +22,7 @@ const LoginContainer = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { addUsername, addPassword, getToken, token } = useContext(UserContext);
+  const { addUsername, addPassword, getToken } = useContext(UserContext);
 
   const handleChangeUsername = (e) => {
     setUsername(e.target.value.trim());

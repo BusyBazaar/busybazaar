@@ -20,7 +20,7 @@ const initialState = {
       _id: '2',
       name: 'Nongshim Shin Ramyun Noodles',
       description: 'spicy ramen',
-      country: 'Japan',
+      country: 'South Korea',
       category: 'food',
       price: 10,
       url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQvbe_jDr27U3Kjojo9IXx7YZeXkkDr6Fl-jlEi36n4XO1gpcwAd9Be4doRww&usqp=CAc'
