@@ -12,6 +12,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const { Users } = require('./models/model.js');
 const { uuid } = require('uuidv4');
+const cors = require('cors');
 
 //Use
 app.use(express.json());
@@ -20,6 +21,7 @@ app.use(cookieParser())
 app.use(passport.initialize());
 app.use(passport.session());
 dotenv.config();
+app.use(cors());
 
 //Mongoose Connection
 mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true });

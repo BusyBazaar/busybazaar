@@ -16,10 +16,11 @@ const Register = (props) => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    fetch('/auth/register', {
+    fetch('http://localhost:3000/auth/register', {
       method: 'POST',
       body: JSON.stringify({username, password}),
       headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
     })
     .then(res => {
       if (res.status === 406) {

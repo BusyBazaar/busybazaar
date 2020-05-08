@@ -29,10 +29,11 @@ const ProductContainer = (props) => {
     console.log('inputs ', inputs)
     if (name && description && country && category && price && url) {
         addProduct({...inputs });
-        fetch('/product/add', {
+        fetch('http://localhost:3000/product/add', {
           method: 'POST',
           body: JSON.stringify({...inputs}),
           headers: { 'Content-Type': 'application/json' },
+          mode: 'cors',
         }) 
         .then(res => {
           props.history.push('/')

@@ -6,7 +6,7 @@ import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui
 
 const LoginContainer = (props) => {
   const token = (new URLSearchParams(useLocation().search).get("token"));
-
+  console.log('OAUTH', token);
   if (token) {
     Auth.login(() => props.history.push('/'));
   }
@@ -25,10 +25,11 @@ const LoginContainer = (props) => {
   const handleSubmit = e => {
     e.preventDefault();
     console.log('username:' + username)
-    fetch('/auth/login', {
+    fetch('http://localhost:3000/auth/login', {
         method: 'POST',
         body: JSON.stringify({username, password}),
         headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
     })
         // 401 and 406  
         .then(res => {
@@ -38,7 +39,7 @@ const LoginContainer = (props) => {
                 setError('This username is not found')
                 props.history.push('/login')
             } else {
-              res.header('Authorization', token);
+              // res.header('Authorization', token);
               addUsername(username);
               addPassword(password);
               Auth.login(() => props.history.push('/'));

@@ -6,11 +6,12 @@ const AddButton = () => {
   const handleGetProducts = e => {
     console.log('hey')
     e.preventDefault();
-    fetch('/product/products', {
+    fetch('http://localhost:3000/product/products', {
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
-      }
+        'Accept': 'application/json'
+      },
+      mode: 'cors',
     })
       .then((res) => res.json())
       .then((json) => {
