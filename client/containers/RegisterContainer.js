@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 import Auth from '../components/Auth';
 import { Link } from "react-router-dom";
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
 const Register = (props) => {
+  let history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -25,9 +27,9 @@ const Register = (props) => {
       if (res.status === 406) {
         setError("username already in use try again");
         console.log('hey')
-        props.history.push("/register");
+        history.push("/register");
       } else {
-          props.history.push("/login");
+          history.push("/login");
         }
     })
 

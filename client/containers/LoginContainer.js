@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Auth from '../components/Auth';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import {
   Button,
@@ -14,9 +14,9 @@ import {
 
 const LoginContainer = (props) => {
   const token = (new URLSearchParams(useLocation().search).get("token"));
-
+  let history = useHistory();
   if (token) {
-    Auth.login(() => props.history.push('/'));
+    Auth.login(() => history.push('/'));
   }
 
   const [username, setUsername] = useState("");
@@ -43,7 +43,7 @@ const LoginContainer = (props) => {
           setError("This password does not match");
         } else if (data.status === 406) {
           setError("This username is not found");
-          props.history.push("/login");
+          history.push("/login");
         } else {
           return data.json();
         }
@@ -52,7 +52,7 @@ const LoginContainer = (props) => {
         getToken(res);
         addUsername(username);
         addPassword(password);
-        Auth.login(() => props.history.push("/"));
+        Auth.login(() => history.push("/"));
       })
       .catch((err) => console.log(err));
   };

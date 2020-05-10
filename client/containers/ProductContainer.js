@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
-
+import { useHistory } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
 const ProductContainer = (props) => {
+  let history = useHistory();
   const [inputs, setInputs] = useState({
     name: '',
     description: '',
@@ -33,7 +34,7 @@ const ProductContainer = (props) => {
           headers: { 'Content-Type': 'application/json', 'Authorization': token },
         }) 
         .then(res => {
-          props.history.push('/')
+          history.push('/')
         })
     }
   }
