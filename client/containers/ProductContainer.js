@@ -24,10 +24,7 @@ const ProductContainer = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     setSubmitted(true);
-    console.log('inputs ', inputs)
-    console.log(token);
     if (name && description && country && category && price && url) {
         addProduct({...inputs });
         fetch('/product/add', {
@@ -39,30 +36,7 @@ const ProductContainer = (props) => {
           props.history.push('/')
         })
     }
-}
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   console.log('username:' + username)
-  //   fetch('/auth/login', {
-  //       method: 'POST',
-  //       body: JSON.stringify({username, password}),
-  //       headers: { 'Content-Type': 'application/json' },
-  //   })
-  //       // 401 and 406  
-  //       .then(res => {
-  //           if (res.status === 401) {
-  //               setError('This password does not match')
-  //           } else if (res.status === 406) {
-  //               setError('This username is not found')
-  //               props.history.push('/login')
-  //           } else {
-  //             addUsername(username);
-  //             addPassword(password);
-  //             Auth.login(() => props.history.push('/'));
-  //           }
-  //       })
-  //    }
+  }
 
   return (
     <div>
@@ -90,24 +64,49 @@ const ProductContainer = (props) => {
               />
           </div>
           <div className="input-field">
-              <input
-                  type="text"
-                  name="country"
-                  value={country}
-                  id="country"
-                  onChange={handleChange}
-                  placeholder="country"
-              />
+              <select value={country} id="country" name="country" onChange={handleChange}>
+                  <option value="" disabled selected hidden>Country</option>
+                  <option value="afghanistan">Afghanistan</option>
+                  <option value="argentina">Argentina</option>
+                  <option value="brazil">Brazil</option> 
+                  <option value="canada">Canada</option>
+                  <option value="china">China</option>
+                  <option value="hongkong">Hong Kong</option>
+                  <option value="india">India</option>
+                  <option value="indonesia">Indonesia</option>
+                  <option value="iran">Iran</option>
+                  <option value="iraq">Iraq</option>
+                  <option value="japan">Japan</option>
+                  <option value="macau">Macau</option>
+                  <option value="malaysia">Malaysia</option>
+                  <option value="mexico">Mexico</option>
+                  <option value="northkorea">North Korea</option>
+                  <option value="pakistan">Pakistan</option>
+                  <option value="peru">Peru</option>
+                  <option value="russia">Russia</option>
+                  <option value="singapore">Singapore</option>
+                  <option value="south-korea">South Korea</option>
+                  <option value="taiwan">Taiwan</option>
+                  <option value="thailand">Thailand</option>
+                  <option value="turkey">Turkey</option>
+                  <option value="vietnam">Vietnam</option>
+               </select>
           </div>
           <div className="input-field">
-              <input
-                  type="text"
-                  name="category"
-                  value={category}
-                  id="category"
-                  onChange={handleChange}
-                  placeholder="category"
-              />
+              <select value={category} id="category" name="category" onChange={handleChange}>
+                <option value="" disabled selected hidden>Category</option>
+                <option value="baby">Baby</option>
+                <option value="beauty">Beauty</option>
+                <option value="books">Books</option>
+                <option value="clothing">Clothing</option>
+                <option value="food">Food</option>
+                <option value="health">Health</option>
+                <option value="home">Home</option>
+                <option value="sports">Sports</option>
+                <option value="toys">Toys</option>
+                <option value="travel">Travel</option>
+                <option value="video-games">Video Games</option>
+              </select>
           </div>        
           <div className="input-field">
               <input
