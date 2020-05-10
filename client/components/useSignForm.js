@@ -1,16 +1,12 @@
 import { useState } from 'react';
 
-const useForm = callback => {
+const useSignForm = callback => {
 
   const [inputs, setInputs] = useState({
-    name: '',
-    description: '',
-    country: '',
-    category: '',
-    price: '',
-    url: ''
+    username: '',
+    password: '',
   });
-  const { name, description, country, category, price, url } = inputs;
+  const { username, password } = inputs;
   
   function handleChange(e) {
     const { name, value } = e.target;
@@ -20,7 +16,7 @@ const useForm = callback => {
   function handleSubmit(e) {
     e.preventDefault();
     // setSubmitted(true);
-    if (name && description && country && category && price && url) {
+    if (username && password) {
       callback();
     }
   }
@@ -32,4 +28,4 @@ const useForm = callback => {
 
 }
 
-export default useForm;
+export default useSignForm;
