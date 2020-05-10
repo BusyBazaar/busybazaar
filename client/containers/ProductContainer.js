@@ -1,42 +1,27 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import useForm from "../components/useForm";
 
 const ProductContainer = (props) => {
   let history = useHistory();
-  const [inputs, setInputs] = useState({
-    name: '',
-    description: '',
-    country: '',
-    category: '',
-    price: '',
-    url: ''
-  });
+  const { handleChange, handleSubmit, inputs } = useForm(submit);
   const { name, description, country, category, price, url } = inputs;
 
-  const [submitted, setSubmitted] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
 
   const { addProduct, token } = useContext(UserContext);
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setInputs(inputs => ({ ...inputs, [name]: value }));
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    setSubmitted(true);
-    if (name && description && country && category && price && url) {
-        addProduct({...inputs });
-        fetch('/product/add', {
-          method: 'POST',
-          body: JSON.stringify({...inputs}),
-          headers: { 'Content-Type': 'application/json', 'Authorization': token },
-        }) 
-        .then(res => {
-          history.push('/')
-        })
-    }
+  function submit(){
+    addProduct({...inputs});
+    fetch('/product/add', {
+      method: 'POST',
+      body: JSON.stringify({...inputs}),
+      headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    }) 
+    .then(res => {
+      history.push('/')
+    })
   }
 
   return (
