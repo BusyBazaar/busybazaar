@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 import Auth from '../components/Auth';
 import { Link } from "react-router-dom";
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import useSignForm from "../components/useSignForm";
 
 const Register = (props) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  let history = useHistory();
   const [error, setError] = useState("");
-
-  const handleChangeUsername = e => {
-    setUsername(e.target.value.trim());
-  };
-  const handleChangePassword = e => {
-    setPassword(e.target.value.trim());
-  };
-  const handleSubmit = e => {
-    e.preventDefault();
+  const { handleChange, handleSubmit, inputs } = useSignForm(submit);
+  const { username, password } = inputs;
+  function submit(){
     fetch('/auth/register', {
       method: 'POST',
       body: JSON.stringify({username, password}),
@@ -25,12 +20,11 @@ const Register = (props) => {
       if (res.status === 406) {
         setError("username already in use try again");
         console.log('hey')
-        props.history.push("/register");
+        history.push("/register");
       } else {
-          props.history.push("/login");
+          history.push("/login");
         }
     })
-
   };
   return (
     <div>
@@ -47,19 +41,21 @@ const Register = (props) => {
               <Form.Input 
                 fluid icon='user' 
                 iconPosition='left' 
+                name="username"
                 value={username}
                 placeholder='username' 
                 type='text'
-                onChange={handleChangeUsername}
+                onChange={handleChange}
               />
               <Form.Input
                 fluid
                 icon='lock'
                 iconPosition='left'
+                name="password"
                 value={password}
                 placeholder='password'
                 type='password'
-                onChange={handleChangePassword}
+                onChange={handleChange}
               />
               <Button color='blue' fluid size='large'>
                 Register

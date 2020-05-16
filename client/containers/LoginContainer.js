@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Auth from '../components/Auth';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import {
   Button,
@@ -11,28 +11,21 @@ import {
   Message,
   Segment,
 } from "semantic-ui-react";
+import useSignForm from "../components/useSignForm";
 
 const LoginContainer = (props) => {
-  //const token = (new URLSearchParams(useLocation().search).get("token"));
-
+  const token = (new URLSearchParams(useLocation().search).get("token"));
+  let history = useHistory();
   if (token) {
-    Auth.login(() => props.history.push('/'));
+    Auth.login(() => history.push('/'));
   }
+  const { handleChange, handleSubmit, inputs } = useSignForm(submit);
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const { username, password } = inputs;
   const [error, setError] = useState("");
-  const { addUsername, addPassword, getToken, token } = useContext(UserContext);
+  const { addUsername, addPassword, getToken } = useContext(UserContext);
 
-  const handleChangeUsername = (e) => {
-    setUsername(e.target.value.trim());
-  };
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value.trim());
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("username:" + username);
+  function submit(){
     fetch("/auth/login", {
       method: "POST",
       body: JSON.stringify({ username, password }),
@@ -43,7 +36,7 @@ const LoginContainer = (props) => {
           setError("This password does not match");
         } else if (data.status === 406) {
           setError("This username is not found");
-          props.history.push("/login");
+          history.push("/login");
         } else {
           return data.json();
         }
@@ -52,7 +45,7 @@ const LoginContainer = (props) => {
         getToken(res);
         addUsername(username);
         addPassword(password);
-        Auth.login(() => props.history.push("/"));
+        Auth.login(() => history.push("/"));
       })
       .catch((err) => console.log(err));
   };
@@ -75,21 +68,23 @@ const LoginContainer = (props) => {
             <Segment stacked>
               <Form.Input
                 fluid
+                name="username"
                 icon="user"
                 iconPosition="left"
                 value={username}
                 placeholder="username"
                 type="text"
-                onChange={handleChangeUsername}
+                onChange={handleChange}
               />
               <Form.Input
                 fluid
+                name="password"
                 icon="lock"
                 iconPosition="left"
                 value={password}
                 placeholder="password"
                 type="password"
-                onChange={handleChangePassword}
+                onChange={handleChange}
               />
 
               <Button color="blue" fluid size="large">

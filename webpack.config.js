@@ -5,9 +5,9 @@ module.exports = {
   entry: "./client/index.js",
   devServer: {
     historyApiFallback: true,
-    // proxy: {
-    //   "/": "http://localhost:3000/",
-    // },
+    proxy: {
+      "/": "http://localhost:3000/",
+    },
     contentBase: "./client",
     publicPath: "/dist",
     historyApiFallback: true,
