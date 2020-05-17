@@ -1,21 +1,21 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: "./client/index.js",
   devServer: {
-    historyApiFallback: true,
+    contentBase: path.resolve(__dirname, 'client'),
+    publicPath: path.join(__dirname, '/dist/'),
+    compress: true,
+    port: 8080,
     proxy: {
-      "/": "http://localhost:3000/",
-    },
-    contentBase: "./client",
-    publicPath: "/dist",
-    historyApiFallback: true,
+      '/': 'http://localhost:3000'
+    }
   },
+  entry: './client/index.js',
   output: {
-    path: path.resolve(__dirname, "dist"),
-    publicPath: "/",
-    filename: "bundle.js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
   },
   module: {
     rules: [
@@ -42,4 +42,10 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx", ".css", ".scss"],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './client/index.html',
+      filename: './index.html'
+    })
+  ]
 };
